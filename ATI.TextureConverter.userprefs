@@ -1,0 +1,33 @@
+﻿<Properties StartupItem="ATI.TextureConverter.Console/ATI.TextureConverter.Console.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ATI.TextureConverter.Tests/CompressionTests.cs">
+    <Files>
+      <File FileName="ATI.TextureConverter.Console/Program.cs" Line="28" Column="28" />
+      <File FileName="../../Downloads/adrenosdk-osx/Development/Tools/TextureConverter/samples/Convert2ATITC/src/Convert2ATITC.cpp" Line="74" Column="74" />
+      <File FileName="ATI.TextureConverter/TextureConverter.cs" Line="22" Column="22" />
+      <File FileName="../../Downloads/adrenosdk-osx/Development/Tools/TextureConverter/inc/TextureConverter.h" Line="49" Column="49" />
+      <File FileName="ATI.TextureConverter.Tests/CompressionTests.cs" Line="23" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="ATI.TextureConverter.Tests" expanded="True">
+            <Node name="ATI" expanded="True">
+              <Node name="TextureConverter" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="CompressionTests" expanded="True">
+                    <Node name="TestRGBAToATITCCompression" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
