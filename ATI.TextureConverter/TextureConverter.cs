@@ -3,7 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace ATI.TextureConverter
 {
-	public enum QFormat : uint {
+	public enum QFormat : uint
+	{
 
 		/// Q_FORMAT_RGBA_8UI -> 1
 		Q_FORMAT_RGBA_8UI = 1,
@@ -213,7 +214,8 @@ namespace ATI.TextureConverter
 		Q_FORMAT_ASTC_16,
 	}
 
-	public enum TEncodeFlag {
+	public enum TEncodeFlag
+	{
 
 		/// Q_FLAG_ENCODE_NONE -> 0
 		Q_FLAG_ENCODE_NONE = 0,
@@ -224,7 +226,8 @@ namespace ATI.TextureConverter
 		Q_FLAG_ENCODE_ATITC_FAST,
 	}
 
-	public enum TScaleFilterFlag {
+	public enum TScaleFilterFlag
+	{
 
 		/// Q_FLAG_SCALEFILTER_DEFAULT -> 0
 		Q_FLAG_SCALEFILTER_DEFAULT = 0,
@@ -240,7 +243,8 @@ namespace ATI.TextureConverter
 		Q_FLAG_SCALEFILTER_KAISER,
 	}
 
-	public enum TNormalMapFlag {
+	public enum TNormalMapFlag
+	{
 
 		/// Q_FLAG_NORMALMAP_NONE -> 0
 		Q_FLAG_NORMALMAP_NONE = 0,
@@ -252,7 +256,8 @@ namespace ATI.TextureConverter
 		Q_FLAG_NORMALMAP_PREWITTGRADIENT,
 	}
 
-	public enum TDebugFlags {
+	public enum TDebugFlags
+	{
 
 		/// Q_FLAG_DEBUG_DEFAULT -> 0
 		Q_FLAG_DEBUG_DEFAULT = 0,
@@ -264,7 +269,8 @@ namespace ATI.TextureConverter
 		Q_FLAG_DEBUG_VERSION = 2,
 	}
 
-	public enum TReturnCode {
+	public enum TReturnCode
+	{
 
 		/// Q_SUCCESS -> 0
 		Q_SUCCESS = 0,
@@ -288,8 +294,9 @@ namespace ATI.TextureConverter
 		Q_ERROR_OTHER,
 	}
 
-	[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct TFormatFlags {
+	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
+	public struct TFormatFlags
+	{
 
 		/// unsigned int
 		public uint nStride;
@@ -331,8 +338,9 @@ namespace ATI.TextureConverter
 		public uint nDebugFlags;
 	}
 
-	[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct TQonvertImage {
+	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
+	public struct TQonvertImage
+	{
 
 		/// unsigned int
 		public uint nWidth;
@@ -357,7 +365,8 @@ namespace ATI.TextureConverter
 		public System.IntPtr compressionOptions;
 	}
 
-	public enum CompressionOptionsType {
+	public enum CompressionOptionsType
+	{
 
 		/// CompType_None -> 0
 		CompType_None = 0,
@@ -369,7 +378,8 @@ namespace ATI.TextureConverter
 		CompType_Count,
 	}
 
-	public enum ASTCCompressionOptionsSpeed {
+	public enum ASTCCompressionOptionsSpeed
+	{
 
 		/// ASTC_EXHAUSTIVE -> 0
 		ASTC_EXHAUSTIVE = 0,
@@ -383,7 +393,8 @@ namespace ATI.TextureConverter
 		ASTC_VERY_FAST,
 	}
 
-	public enum ASTCCompressionOptionsMode {
+	public enum ASTCCompressionOptionsMode
+	{
 
 		/// ASTC_HDR -> 0
 		ASTC_HDR = 0,
@@ -393,7 +404,8 @@ namespace ATI.TextureConverter
 		ASTC_LINEAR,
 	}
 
-	public enum ASTCCompressionOptionsDefaultOrCustom {
+	public enum ASTCCompressionOptionsDefaultOrCustom
+	{
 
 		/// DEFAULT -> 0
 		DEFAULT = 0,
@@ -401,7 +413,8 @@ namespace ATI.TextureConverter
 		CUSTOM,
 	}
 
-	public enum ASTCCompressionOptionsUseBitRate {
+	public enum ASTCCompressionOptionsUseBitRate
+	{
 
 		/// USE_BITRATE -> 0
 		USE_BITRATE = 0,
@@ -409,7 +422,8 @@ namespace ATI.TextureConverter
 		USE_BLOCK_DIMENSIONS,
 	}
 
-	public enum ASTCCompressionOptionsCommand {
+	public enum ASTCCompressionOptionsCommand
+	{
 
 		/// COMPRESS -> 0
 		COMPRESS = 0,
@@ -417,7 +431,8 @@ namespace ATI.TextureConverter
 		DECOMPRESS,
 	}
 
-	public enum ASTC_BIT_FIDELITY {
+	public enum ASTC_BIT_FIDELITY
+	{
 
 		/// ASTC_8_BIT -> 1
 		ASTC_8_BIT = 1,
@@ -427,8 +442,9 @@ namespace ATI.TextureConverter
 		ASTC_32_BIT,
 	}
 
-	[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct ASTCOptions {
+	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
+	public struct ASTCOptions
+	{
 
 		/// int
 		public int CompressionSpeed;
@@ -482,7 +498,7 @@ namespace ATI.TextureConverter
 		public int ASTCCompressionMode;
 
 		/// unsigned char*
-		[System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.LPStr)]
+		[System.Runtime.InteropServices.MarshalAsAttribute (System.Runtime.InteropServices.UnmanagedType.LPStr)]
 		public string astc_pData;
 
 		/// TQonvertImage*
@@ -492,8 +508,9 @@ namespace ATI.TextureConverter
 		public System.IntPtr astc_pDest;
 	}
 
-	[System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct StandardOptions {
+	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
+	public struct StandardOptions
+	{
 
 		/// int
 		public int ImageType;
@@ -505,80 +522,82 @@ namespace ATI.TextureConverter
 		public System.IntPtr CompressionOptions;
 	}
 
-	public partial class NativeMethods {
+	public partial class NativeMethods
+	{
 
 		/// Return Type: unsigned short
 		///nByte: unsigned char
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="UByteToUInt16")]
-		public static extern  ushort UByteToUInt16(byte nByte) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "UByteToUInt16")]
+		public static extern  ushort UByteToUInt16 (byte nByte) ;
 
 
 		/// Return Type: short
 		///nByte: unsigned char
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="UByteToInt16")]
-		public static extern  short UByteToInt16(byte nByte) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "UByteToInt16")]
+		public static extern  short UByteToInt16 (byte nByte) ;
 
 
 		/// Return Type: _TQonvertImage*
 		///param0: _TQonvertImage*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="NewTQonvertImage")]
-		public static extern  System.IntPtr NewTQonvertImage(ref TQonvertImage param0) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewTQonvertImage")]
+		public static extern  System.IntPtr NewTQonvertImage (ref TQonvertImage param0) ;
 
 
 		/// Return Type: unsigned int
 		///pSrcImg: TQonvertImage*
 		///pDstImg: TQonvertImage*
 		///options: void*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="Qonvert")]
-		public static extern  uint Qonvert(ref TQonvertImage pSrcImg, ref TQonvertImage pDstImg, System.IntPtr options) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "Qonvert")]
+		public static extern  uint Qonvert (ref TQonvertImage pSrcImg, ref TQonvertImage pDstImg, System.IntPtr options) ;
 
 
 		/// Return Type: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="NewASTCOptions")]
-		public static extern  System.IntPtr NewASTCOptions() ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewASTCOptions")]
+		public static extern  System.IntPtr NewASTCOptions () ;
 
 
 		/// Return Type: _ASTCOptions*
 		///param0: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="NewASTCOptionsCopy")]
-		public static extern  System.IntPtr NewASTCOptionsCopy(ref ASTCOptions param0) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewASTCOptionsCopy")]
+		public static extern  System.IntPtr NewASTCOptionsCopy (ref ASTCOptions param0) ;
 
 
 		/// Return Type: boolean
 		///me: _ASTCOptions*
 		///other: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="ASTCOptionsEqual")]
-		[return: System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.I1)]
-		public static extern  bool ASTCOptionsEqual(ref ASTCOptions me, ref ASTCOptions other) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "ASTCOptionsEqual")]
+		[return: System.Runtime.InteropServices.MarshalAsAttribute (System.Runtime.InteropServices.UnmanagedType.I1)]
+		public static extern  bool ASTCOptionsEqual (ref ASTCOptions me, ref ASTCOptions other) ;
 
 
 		/// Return Type: _StandardOptions*
 		///param0: int
 		///param1: int
 		///param2: void*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="NewStandardOptions")]
-		public static extern  System.IntPtr NewStandardOptions(int param0, int param1, System.IntPtr param2) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewStandardOptions")]
+		public static extern  System.IntPtr NewStandardOptions (int param0, int param1, System.IntPtr param2) ;
 
 
 		/// Return Type: _StandardOptions*
 		///options: _StandardOptions*
-		[System.Runtime.InteropServices.DllImportAttribute("TextureConverter.dll", EntryPoint="NewStandardOptionsCopy")]
-		public static extern  System.IntPtr NewStandardOptionsCopy(ref StandardOptions options) ;
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewStandardOptionsCopy")]
+		public static extern  System.IntPtr NewStandardOptionsCopy (ref StandardOptions options) ;
 
-		static T Alloc<T>() {
-			int typeSize = Marshal.SizeOf(typeof(T));
+		static T Alloc<T> ()
+		{
+			int typeSize = Marshal.SizeOf (typeof(T));
 			unsafe {
 				IntPtr ptr = Marshal.AllocHGlobal (typeSize);
-				byte* basePtr = (byte*) ptr.ToPointer();
+				byte* basePtr = (byte*)ptr.ToPointer ();
 				for (int idx = 0; idx < typeSize; idx++)
 					*basePtr++ = 0;
 				return (T)Marshal.PtrToStructure (ptr, typeof(T));
 			}
 		}
 
-		public static TQonvertImage CreateEmptyQonvertImage() {
-
-			return Alloc<TQonvertImage> ();;
+		public static TQonvertImage CreateEmptyQonvertImage ()
+		{
+			return Alloc<TQonvertImage> ();
 		}
 
 	}

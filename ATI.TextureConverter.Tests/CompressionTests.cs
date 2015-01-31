@@ -39,6 +39,7 @@ namespace ATI.TextureConverter.Tests
 			textureOut.nDataSize    = 0;
 			textureOut.pData        = IntPtr.Zero; 
 
+			// with textureout.pData as Zero we requiest the DataSize
 			Assert.IsTrue (NativeMethods.Qonvert (ref textureIn, ref textureOut, IntPtr.Zero) == (uint)TReturnCode.Q_SUCCESS, "Qovert failed to get data size");
 
 			Assert.AreEqual (16384,textureOut.nDataSize, "Dataize is not what was expected");
