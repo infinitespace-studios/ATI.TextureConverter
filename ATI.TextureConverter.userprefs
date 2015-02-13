@@ -1,6 +1,10 @@
 ﻿<Properties StartupItem="ATI.TextureConverter.Console/ATI.TextureConverter.Console.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ATI.TextureConverter/TextureConverter.cs">
+    <Files>
+      <File FileName="ATI.TextureConverter.Console/Program.cs" Line="119" Column="119" />
+      <File FileName="ATI.TextureConverter/TextureConverter.cs" Line="93" Column="93" />
+    </Files>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True">
