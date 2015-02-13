@@ -14,7 +14,7 @@ Once you have extracted the files you will need to copy the appropriate library 
 * Linux   : libTextureConverter.so
 * Windows : TextureConverter.dll
 
-*Note*, the libraries are only 32 bit so you might encounter some issues if you are running a 64bit .Net runtime.
+*Note*, the mac library is 32 bit only. There are both 32 and 64 bit versions of the linux and windows libraries available. Make sure you use the correct one.
 
 ## Usage
 
