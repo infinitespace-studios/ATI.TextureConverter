@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ATI.TextureConverter
 {
-	public enum QFormat : uint
+	internal enum QFormat : uint
 	{
 
 		/// Q_FORMAT_RGBA_8UI -> 1
@@ -214,7 +214,7 @@ namespace ATI.TextureConverter
 		Q_FORMAT_ASTC_16,
 	}
 
-	public enum TEncodeFlag
+	internal enum TEncodeFlag
 	{
 
 		/// Q_FLAG_ENCODE_NONE -> 0
@@ -226,7 +226,7 @@ namespace ATI.TextureConverter
 		Q_FLAG_ENCODE_ATITC_FAST,
 	}
 
-	public enum TScaleFilterFlag
+	internal enum TScaleFilterFlag
 	{
 
 		/// Q_FLAG_SCALEFILTER_DEFAULT -> 0
@@ -243,7 +243,7 @@ namespace ATI.TextureConverter
 		Q_FLAG_SCALEFILTER_KAISER,
 	}
 
-	public enum TNormalMapFlag
+	internal enum TNormalMapFlag
 	{
 
 		/// Q_FLAG_NORMALMAP_NONE -> 0
@@ -256,7 +256,7 @@ namespace ATI.TextureConverter
 		Q_FLAG_NORMALMAP_PREWITTGRADIENT,
 	}
 
-	public enum TDebugFlags
+	internal enum TDebugFlags
 	{
 
 		/// Q_FLAG_DEBUG_DEFAULT -> 0
@@ -269,7 +269,7 @@ namespace ATI.TextureConverter
 		Q_FLAG_DEBUG_VERSION = 2,
 	}
 
-	public enum TReturnCode
+	internal enum TReturnCode
 	{
 
 		/// Q_SUCCESS -> 0
@@ -295,7 +295,7 @@ namespace ATI.TextureConverter
 	}
 
 	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct TFormatFlags
+	internal struct TFormatFlags
 	{
 
 		/// unsigned int
@@ -339,7 +339,7 @@ namespace ATI.TextureConverter
 	}
 
 	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct TQonvertImage
+	internal struct TQonvertImage
 	{
 
 		/// unsigned int
@@ -365,7 +365,7 @@ namespace ATI.TextureConverter
 		public System.IntPtr compressionOptions;
 	}
 
-	public enum CompressionOptionsType
+	internal enum CompressionOptionsType
 	{
 
 		/// CompType_None -> 0
@@ -378,7 +378,7 @@ namespace ATI.TextureConverter
 		CompType_Count,
 	}
 
-	public enum ASTCCompressionOptionsSpeed
+	internal enum ASTCCompressionOptionsSpeed
 	{
 
 		/// ASTC_EXHAUSTIVE -> 0
@@ -393,7 +393,7 @@ namespace ATI.TextureConverter
 		ASTC_VERY_FAST,
 	}
 
-	public enum ASTCCompressionOptionsMode
+	internal enum ASTCCompressionOptionsMode
 	{
 
 		/// ASTC_HDR -> 0
@@ -404,7 +404,7 @@ namespace ATI.TextureConverter
 		ASTC_LINEAR,
 	}
 
-	public enum ASTCCompressionOptionsDefaultOrCustom
+	internal enum ASTCCompressionOptionsDefaultOrCustom
 	{
 
 		/// DEFAULT -> 0
@@ -413,7 +413,7 @@ namespace ATI.TextureConverter
 		CUSTOM,
 	}
 
-	public enum ASTCCompressionOptionsUseBitRate
+	internal enum ASTCCompressionOptionsUseBitRate
 	{
 
 		/// USE_BITRATE -> 0
@@ -422,7 +422,7 @@ namespace ATI.TextureConverter
 		USE_BLOCK_DIMENSIONS,
 	}
 
-	public enum ASTCCompressionOptionsCommand
+	internal enum ASTCCompressionOptionsCommand
 	{
 
 		/// COMPRESS -> 0
@@ -431,7 +431,7 @@ namespace ATI.TextureConverter
 		DECOMPRESS,
 	}
 
-	public enum ASTC_BIT_FIDELITY
+	internal enum ASTC_BIT_FIDELITY
 	{
 
 		/// ASTC_8_BIT -> 1
@@ -443,7 +443,7 @@ namespace ATI.TextureConverter
 	}
 
 	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct ASTCOptions
+	internal struct ASTCOptions
 	{
 
 		/// int
@@ -509,7 +509,7 @@ namespace ATI.TextureConverter
 	}
 
 	[System.Runtime.InteropServices.StructLayoutAttribute (System.Runtime.InteropServices.LayoutKind.Sequential)]
-	public struct StandardOptions
+	internal struct StandardOptions
 	{
 
 		/// int
@@ -522,7 +522,7 @@ namespace ATI.TextureConverter
 		public System.IntPtr CompressionOptions;
 	}
 
-	public partial class NativeMethods
+	internal partial class NativeMethods
 	{
 
 		/// Return Type: unsigned short
@@ -600,8 +600,84 @@ namespace ATI.TextureConverter
 			return Alloc<TQonvertImage> ();
 		}
 
+		public static TFormatFlags CreateFormatFlags() {
+			return Alloc<TFormatFlags> ();
+		}
+
 	}
 
+	public class ATICompressor {
+
+		public enum CompressionFormat
+		{
+			AtcRgbaExplicitAlpha,
+			AtcRgbaInterpolatedAlpha,
+			AtcRgb,
+			Etc1,
+			Etc2Rgba
+		}
+
+		public static byte[] Compress(byte[] data, int width, int height, CompressionFormat targetFormat)
+		{
+			QFormat format = QFormat.Q_FORMAT_RGBA_8UI;
+			switch (targetFormat) {
+			case CompressionFormat.AtcRgb:
+				format = QFormat.Q_FORMAT_ATC_RGB;
+				break;
+			case CompressionFormat.AtcRgbaExplicitAlpha:
+				format = QFormat.Q_FORMAT_ATC_RGBA_EXPLICIT_ALPHA;
+				break;
+			case CompressionFormat.AtcRgbaInterpolatedAlpha:
+				format = QFormat.Q_FORMAT_ATC_RGBA_INTERPOLATED_ALPHA;
+				break;
+			case CompressionFormat.Etc1:
+				format = QFormat.Q_FORMAT_ETC1_RGB8;
+				break;
+			case CompressionFormat.Etc2Rgba:
+				format = QFormat.Q_FORMAT_ETC2_RGBA8;
+				break;
+			}
+
+			uint uwidth = (uint)width;
+			uint uheight = (uint)height;
+
+			var src = NativeMethods.CreateEmptyQonvertImage ();
+			var dst = NativeMethods.CreateEmptyQonvertImage ();
+
+			var handle = GCHandle.Alloc (data, GCHandleType.Pinned);
+			try {
+				src.nWidth = uwidth;
+				src.nHeight = uheight;
+				src.nFormat = (uint)QFormat.Q_FORMAT_RGBA_8UI;
+				src.pData = handle.AddrOfPinnedObject();
+
+				dst.nWidth = uwidth;
+				dst.nHeight = uheight;
+				dst.nFormat = (uint)format;
+				dst.pData = IntPtr.Zero;
+
+				if (NativeMethods.Qonvert (ref src, ref dst, IntPtr.Zero) != (uint)TReturnCode.Q_SUCCESS) {
+					throw new Exception("Error getting compressed data size for ATC Compression");
+				}
+
+				byte[] compressed = new byte[dst.nDataSize];
+				var compressedHandle = GCHandle.Alloc (compressed, GCHandleType.Pinned);
+				try {
+					dst.pData = compressedHandle.AddrOfPinnedObject ();
+
+					if (NativeMethods.Qonvert (ref src, ref dst, IntPtr.Zero) != (uint)TReturnCode.Q_SUCCESS) {
+						throw new Exception("Error getting compressed texture ATC Compression");
+					}
+					return compressed;
+				} finally {
+					compressedHandle.Free ();
+				}
+
+			} finally {
+				handle.Free ();
+			}
+		}
+	}
 
 }
 
