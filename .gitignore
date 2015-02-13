@@ -182,3 +182,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+*.dll
+*.so
+*.dylib
