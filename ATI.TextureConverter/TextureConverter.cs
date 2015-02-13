@@ -619,62 +619,68 @@ namespace ATI.TextureConverter
 
 		public static byte[] Compress(byte[] data, int width, int height, CompressionFormat targetFormat)
 		{
-			QFormat format = QFormat.Q_FORMAT_RGBA_8UI;
-			switch (targetFormat) {
-			case CompressionFormat.AtcRgb:
-				format = QFormat.Q_FORMAT_ATC_RGB;
-				break;
-			case CompressionFormat.AtcRgbaExplicitAlpha:
-				format = QFormat.Q_FORMAT_ATC_RGBA_EXPLICIT_ALPHA;
-				break;
-			case CompressionFormat.AtcRgbaInterpolatedAlpha:
-				format = QFormat.Q_FORMAT_ATC_RGBA_INTERPOLATED_ALPHA;
-				break;
-			case CompressionFormat.Etc1:
-				format = QFormat.Q_FORMAT_ETC1_RGB8;
-				break;
-			case CompressionFormat.Etc2Rgba:
-				format = QFormat.Q_FORMAT_ETC2_RGBA8;
-				break;
-			}
-
-			uint uwidth = (uint)width;
-			uint uheight = (uint)height;
-
-			var src = NativeMethods.CreateEmptyQonvertImage ();
-			var dst = NativeMethods.CreateEmptyQonvertImage ();
-
-			var handle = GCHandle.Alloc (data, GCHandleType.Pinned);
 			try {
-				src.nWidth = uwidth;
-				src.nHeight = uheight;
-				src.nFormat = (uint)QFormat.Q_FORMAT_RGBA_8UI;
-				src.pData = handle.AddrOfPinnedObject();
-
-				dst.nWidth = uwidth;
-				dst.nHeight = uheight;
-				dst.nFormat = (uint)format;
-				dst.pData = IntPtr.Zero;
-
-				if (NativeMethods.Qonvert (ref src, ref dst, IntPtr.Zero) != (uint)TReturnCode.Q_SUCCESS) {
-					throw new Exception("Error getting compressed data size for ATC Compression");
+				QFormat format = QFormat.Q_FORMAT_RGBA_8UI;
+				switch (targetFormat) {
+				case CompressionFormat.AtcRgb:
+					format = QFormat.Q_FORMAT_ATC_RGB;
+					break;
+				case CompressionFormat.AtcRgbaExplicitAlpha:
+					format = QFormat.Q_FORMAT_ATC_RGBA_EXPLICIT_ALPHA;
+					break;
+				case CompressionFormat.AtcRgbaInterpolatedAlpha:
+					format = QFormat.Q_FORMAT_ATC_RGBA_INTERPOLATED_ALPHA;
+					break;
+				case CompressionFormat.Etc1:
+					format = QFormat.Q_FORMAT_ETC1_RGB8;
+					break;
+				case CompressionFormat.Etc2Rgba:
+					format = QFormat.Q_FORMAT_ETC2_RGBA8;
+					break;
 				}
 
-				byte[] compressed = new byte[dst.nDataSize];
-				var compressedHandle = GCHandle.Alloc (compressed, GCHandleType.Pinned);
+				uint uwidth = (uint)width;
+				uint uheight = (uint)height;
+
+				var src = NativeMethods.CreateEmptyQonvertImage ();
+				var dst = NativeMethods.CreateEmptyQonvertImage ();
+
+				var handle = GCHandle.Alloc (data, GCHandleType.Pinned);
 				try {
-					dst.pData = compressedHandle.AddrOfPinnedObject ();
+					src.nWidth = uwidth;
+					src.nHeight = uheight;
+					src.nFormat = (uint)QFormat.Q_FORMAT_RGBA_8UI;
+					src.pData = handle.AddrOfPinnedObject();
+
+					dst.nWidth = uwidth;
+					dst.nHeight = uheight;
+					dst.nFormat = (uint)format;
+					dst.pData = IntPtr.Zero;
 
 					if (NativeMethods.Qonvert (ref src, ref dst, IntPtr.Zero) != (uint)TReturnCode.Q_SUCCESS) {
-						throw new Exception("Error getting compressed texture ATC Compression");
+						throw new Exception("Error getting compressed data size for ATC Compression");
 					}
-					return compressed;
-				} finally {
-					compressedHandle.Free ();
-				}
 
-			} finally {
-				handle.Free ();
+					byte[] compressed = new byte[dst.nDataSize];
+					var compressedHandle = GCHandle.Alloc (compressed, GCHandleType.Pinned);
+					try {
+						dst.pData = compressedHandle.AddrOfPinnedObject ();
+
+						if (NativeMethods.Qonvert (ref src, ref dst, IntPtr.Zero) != (uint)TReturnCode.Q_SUCCESS) {
+							throw new Exception("Error getting compressed texture ATC Compression");
+						}
+						return compressed;
+					} finally {
+						compressedHandle.Free ();
+					}
+
+				} finally {
+					handle.Free ();
+				}
+			} catch (DllNotFoundException ex) {
+				throw new DllNotFoundException (string.Format("{0}{1}See Documentation for more details {1}{2}",ex.Message,
+					Environment.NewLine,
+					"https://github.com/infinitespace-studios/ATI.TextureConverter/blob/master/README.md"));
 			}
 		}
 	}
