@@ -527,19 +527,19 @@ namespace ATI.TextureConverter
 
 		/// Return Type: unsigned short
 		///nByte: unsigned char
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "UByteToUInt16")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "UByteToUInt16")]
 		public static extern  ushort UByteToUInt16 (byte nByte) ;
 
 
 		/// Return Type: short
 		///nByte: unsigned char
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "UByteToInt16")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "UByteToInt16")]
 		public static extern  short UByteToInt16 (byte nByte) ;
 
 
 		/// Return Type: _TQonvertImage*
 		///param0: _TQonvertImage*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewTQonvertImage")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "NewTQonvertImage")]
 		public static extern  System.IntPtr NewTQonvertImage (ref TQonvertImage param0) ;
 
 
@@ -547,25 +547,25 @@ namespace ATI.TextureConverter
 		///pSrcImg: TQonvertImage*
 		///pDstImg: TQonvertImage*
 		///options: void*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "Qonvert")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "Qonvert")]
 		public static extern  uint Qonvert (ref TQonvertImage pSrcImg, ref TQonvertImage pDstImg, System.IntPtr options) ;
 
 
 		/// Return Type: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewASTCOptions")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "NewASTCOptions")]
 		public static extern  System.IntPtr NewASTCOptions () ;
 
 
 		/// Return Type: _ASTCOptions*
 		///param0: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewASTCOptionsCopy")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "NewASTCOptionsCopy")]
 		public static extern  System.IntPtr NewASTCOptionsCopy (ref ASTCOptions param0) ;
 
 
 		/// Return Type: boolean
 		///me: _ASTCOptions*
 		///other: _ASTCOptions*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "ASTCOptionsEqual")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "ASTCOptionsEqual")]
 		[return: System.Runtime.InteropServices.MarshalAsAttribute (System.Runtime.InteropServices.UnmanagedType.I1)]
 		public static extern  bool ASTCOptionsEqual (ref ASTCOptions me, ref ASTCOptions other) ;
 
@@ -574,13 +574,13 @@ namespace ATI.TextureConverter
 		///param0: int
 		///param1: int
 		///param2: void*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewStandardOptions")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "NewStandardOptions")]
 		public static extern  System.IntPtr NewStandardOptions (int param0, int param1, System.IntPtr param2) ;
 
 
 		/// Return Type: _StandardOptions*
 		///options: _StandardOptions*
-		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter.dll", EntryPoint = "NewStandardOptionsCopy")]
+		[System.Runtime.InteropServices.DllImportAttribute ("TextureConverter", EntryPoint = "NewStandardOptionsCopy")]
 		public static extern  System.IntPtr NewStandardOptionsCopy (ref StandardOptions options) ;
 
 		static T Alloc<T> ()
@@ -680,7 +680,7 @@ namespace ATI.TextureConverter
 			} catch (DllNotFoundException ex) {
 				throw new DllNotFoundException (string.Format("{0}{1}See Documentation for more details {1}{2}",ex.Message,
 					Environment.NewLine,
-					"https://github.com/infinitespace-studios/ATI.TextureConverter/blob/master/README.md"));
+					"https://github.com/infinitespace-studios/ATI.TextureConverter/blob/main/README.md"));
 			}
 		}
 	}
